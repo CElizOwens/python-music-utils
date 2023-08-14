@@ -2,7 +2,7 @@
 import requests
 
 # Directory to test the downloading of pdfs
-DEFAULT_DIR = "/Users/owens/music-projects/test-directory/test-dir1/"
+DEFAULT_DIR = "/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/"
 # Use any instrumental pdf url from the parts section of a given work
 # - example pdf below is clarinets from Beethoven Eroica, Breitkopf and Härtel
 TEST_PDF_URL = "https://imslp.org/wiki/Special:ImagefromIndex/23762/hffp"

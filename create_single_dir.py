@@ -11,7 +11,7 @@ Command line: python3 create_single_dir.py directory_name [parent_path]
 import os
 from sys import argv
 
-DEFAULT_PATH = "/Users/owens/music-projects/"
+DEFAULT_PATH = "/Users/owens/music-projects/python-music-utils/"
 
 
 def create_directory(args):

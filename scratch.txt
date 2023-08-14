@@ -1,0 +1,30 @@
+Aug 11th, 2023
+Directory: 'python-music-utils'
+
+Created 3 different python modules:
+- create a single directory
+- create/rename a file
+- download a pdf, rename it, and place it in a particular directory
+
+=========================================================
+
+Aug 12th, 2023
+
+TODO:
+
+=> DONE <= Create git repository for python-music-utils!!
+
+Continue implementing functionality.
+> Download zip file, rename each file in folder, place all files in a directory.
+  - get url of imslp zip file
+  - extract folder from zip file
+  - iterate over files in folder
+  - rename files
+  - place files in a particular directory
+
+> Create tests, make functionality more robust.
+
+> Questions:
+  - OCO -> Could we link to an external site from the sheet music page?
+        -> I want direct access to the 'database'.
+  - Opus -> Shall I figure out how to programmatically upload music to google drive?

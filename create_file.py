@@ -3,7 +3,7 @@ import os
 from sys import argv
 
 
-TEST_DIR = "/Users/owens/music-projects/test-directory/"
+TEST_DIR = "/Users/owens/music-projects/test-directory/python-music-utils/"
 
 
 # args array: create_file.py newfile | currfile[ newfilename]
