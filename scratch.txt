@@ -33,7 +33,7 @@ Continue implementing functionality.
 
 Aug 18, 2023
 
-Reviewing work so far...
+Reviewing work so far for UPLOAD FUNCTIONALITY...
 
 Add quickstart.py:
 - originally from Google's GCP API tutorial
@@ -75,3 +75,13 @@ NEXT:
 - add upload files to folder
 - connect file download from IMSLP to file upload to Drive
 - download IMSLP zip of parts, rename, store in folder, upload folder to Drive
+
+=========================================================
+
+Aug 30, 2023
+
+DOWNLOAD FUNCTIONALITY COMPLETED: (must manually login to imslp first)
+- Enter command: python download_part.py <url-of-part-hyperlink>
+- part is downloaded to local, renamed based on part name in url
+Modules involved: download_part.py, get_cookies.py, part_name_formatter.py
+Exceptions are included. Still need tests.

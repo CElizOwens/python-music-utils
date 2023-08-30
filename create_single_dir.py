@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!usr/bin/env python
 
 """
 Command line: python3 create_single_dir.py directory_name [parent_path]
