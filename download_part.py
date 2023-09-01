@@ -25,7 +25,6 @@ cookie = get_cookies.getCookiesFromDomain("imslp")
 
 def download_pdf(part_url):
     try:
-        part_url = args[1]
         # pass dict of cookie value paired with imslp's key of 'cookie' to get method's cookies parameter
         response = requests.get(part_url, cookies={"cookie": cookie})
         if response.status_code != 200:
