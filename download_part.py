@@ -2,7 +2,7 @@
 from sys import argv
 import requests
 import get_cookies
-from part_name_formatter import convert
+import part_name_formatter as formatter
 
 # Directory to test the downloading of pdfs
 DEFAULT_DIR = "/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/"
@@ -23,8 +23,7 @@ cookie = get_cookies.getCookiesFromDomain("imslp")
 # -- rename of part's filename
 
 
-def download_pdf(args):
-    assert len(args) == 2, "Must pass one argument: 'part_url'"
+def download_pdf(part_url):
     try:
         part_url = args[1]
         # pass dict of cookie value paired with imslp's key of 'cookie' to get method's cookies parameter
@@ -33,15 +32,17 @@ def download_pdf(args):
             raise RuntimeError(
                 f"Response status code is not 200. Received: {response.status_code}"
             )
-        pdf_url = response.url
-        pdf_filename = convert(pdf_url)
 
+        pdf_url = response.url
+        pdf_filename = formatter.convert(pdf_url)
         content_type = response.headers["content-type"]
-        print("\n")
-        print(f"Response content-type: {content_type}")
+
+        print(f"\nResponse content-type: {content_type}")
+
+        # prepare to write the downloaded pdf (binary) to a file
         pdf = open(f"{DEFAULT_DIR}{pdf_filename}", "wb+")
         pdf.write(response.content)
-        # get first line of file
+        # get first line of file (should be '%PDF'...)
         pdf.seek(0)
         line = pdf.readline()
         pdf.close()
@@ -50,21 +51,19 @@ def download_pdf(args):
         first_text = line.decode("ascii")
         if first_text[:4] != "%PDF":
             raise ValueError(
-                f"Expected file format 'pdf' to be specified on first line. Received '{first_text}'."
+                f"ValueError: Expected file format 'pdf' to be specified on first line.\nReceived: '{first_text[:-1]}'"
             )
+
         print(f"\n{pdf_filename} downloaded!\n")
+
     except Exception as e:
-        print(f"\n -- Error in 'download_part.py' => {e}\n")
+        print(f"\n -- Error in 'download_part.py' --\n{e}\n")
 
 
 # download_pdf(TEST_PDF_URL)
+
 if __name__ == "__main__":
-    download_pdf(argv)
-
-"""
-security wants to use your confidential information stored in "Chrome Safe Storage" in your keychain.
-To allow this, enter the "login" keychain password.
-
-security wants to access key "Chrome Safe Storage in your keychain.
-To allow this, enter the "login" keychain password.
-"""
+    assert (
+        len(argv) == 2
+    ), "Must provide part_url argument: python download_part.py <part_url>"
+    download_pdf(argv[1])

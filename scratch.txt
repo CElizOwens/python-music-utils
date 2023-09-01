@@ -60,9 +60,9 @@ https://www.programcreek.com/python/example/124839/google_auth_oauthlib.flow.Ins
 
 
 => DONE <= Experimentation with service account auth (instead of user account):
-- It works, but I didn't realize that the file is uploaded to the service account Google Drive account,
+- It works, but I didn't realize that the file is uploaded to the service account's Google Drive account,
   NOT my personal Google Drive. Can share a service account folder with my personal account,
-  but I rather stick with the user account way of uploading files so that
+  but I'd rather stick with the user account way of uploading files so that
   I can see the files in my UI, automatically, upon uploading.
 
 => CONFIRMING USER ACCT METHOD <= Going with user account oauth.
@@ -85,3 +85,24 @@ DOWNLOAD FUNCTIONALITY COMPLETED: (must manually login to imslp first)
 - part is downloaded to local, renamed based on part name in url
 Modules involved: download_part.py, get_cookies.py, part_name_formatter.py
 Exceptions are included. Still need tests.
+
+=========================================================
+
+Aug 31, 2023
+
+IMPORTANT TO REMEMBER:
+- Keychain access: At 'Chrome Safe Storage' keychain prompt, instruct user to enter OS user password
+  and select 'Always Allow'. If user is not comfortable with this option, may select 'Allow' and simply respond
+  to the prompt each time user triggers a download. 'Deny' will terminate the download process.
+
+TODO:
+- clean up code later....
+=> DONE <= research workarounds for these two OS alerts:
+  ->  security wants to use your confidential information stored in "Chrome Safe Storage" in your keychain.
+      To allow this, enter the "login" keychain password. [Always Allow, Deny, Allow]
+  ->  security wants to access key "Chrome Safe Storage" in your keychain.
+      To allow this, enter the "login" keychain password. [Always Allow, Deny, Allow]
+  - going to run download_part.py and see if I have the option to select 'Always Allow'
+    when prompted by the two messages above...
+    YES! => Was given the first prompt, typed in password, selected 'Always Allow'. No second prompt.
+
