@@ -90,11 +90,6 @@ Exceptions are included. Still need tests.
 
 Aug 31, 2023
 
-IMPORTANT TO REMEMBER:
-- Keychain access: At 'Chrome Safe Storage' keychain prompt, instruct user to enter OS user password
-  and select 'Always Allow'. If user is not comfortable with this option, may select 'Allow' and simply respond
-  to the prompt each time user triggers a download. 'Deny' will terminate the download process.
-
 TODO:
 - clean up code later....
 => DONE <= research workarounds for these two OS alerts:
@@ -106,3 +101,29 @@ TODO:
     when prompted by the two messages above...
     YES! => Was given the first prompt, typed in password, selected 'Always Allow'. No second prompt.
 
+Sept 1, 2023
+
+IMPORTANT TO REMEMBER:
+- Keychain access: At 'Chrome Safe Storage' keychain prompt, instruct user to enter OS user password
+  and select 'Always Allow'. If user is not comfortable with this option, may select 'Allow' and simply respond
+  to the prompt each time user triggers a download. 'Deny' will terminate the download process.
+- User will be prompted by google oauth to allow python-music-utils app full access their drive.
+
+TODO:
+=> DONE <= See if there is a SCOPE that can limit app to specifically reading and writing (not deleting).
+  -> Using scope 'drive.file'. Allows reading, editing, creating and deleting files and folders.
+
+Sept 5, 2023
+
+IMPORTANT TO REMEMBER:
+- Drive owner will be prompted to allow the python-music-utils app view/edit/create/delete access:
+  - only to files/folders that the app creates -- no access to resources created via the web UI.
+
+TODO:
+=> DONE <= Determine if the user authorization flow occurs every time, or just the first time.
+  -> Only the first time. If I change the scope, app must go through authorization flow again.
+
+- CLEAN UP QUICKSTART.PY and rename with a more descriptive name.
+- Figure out how to create folders...
+- Create a root folder, 'IMSLP-App', to hold all further app-created folders
+- Figure out how to view folders.

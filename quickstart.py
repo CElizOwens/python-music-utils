@@ -1,38 +1,37 @@
 # from __future__ import print_function
 
 import os
+from sys import argv
 import json
 
 from google.auth.transport.requests import Request
 
 from google.oauth2.credentials import Credentials
 
-# from google.oauth2.service_account import Credentials
-
-# from oauth2client.service_account import ServiceAccountCredentials
-
 from google_auth_oauthlib.flow import InstalledAppFlow
+
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
-# If modifying these scopes, delete the file token.json.
+""" If modifying the scope, delete file 'token.json'. """
 # SCOPES = ["https://www.googleapis.com/auth/drive.metadata.readonly"]
-SCOPES = ["https://www.googleapis.com/auth/drive"]
+# SCOPES = ["https://www.googleapis.com/auth/drive"]
+
+# Allows app to view/manage only files and folders that it has created
+SCOPES = [
+    "https://www.googleapis.com/auth/drive.file",
+]
+
+""" As of now, app will only work on my machine because credentials are only on my machine. """
 USER_CREDENTIALS_JSON = json.loads(os.environ["PMU_COW_USER_CREDENTIALS"])
-# SERVICE_CREDENTIALS_JSON = json.loads(os.environ["PMU_COW_SERVICE_CREDENTIALS"])
 
 
-def main():
+def main(part_name):
     """Shows basic usage of the Drive v3 API.
     Prints the names and ids of the first 10 files the user has access to.
     """
     creds = None
-
-    # for service account
-    # creds = Credentials.from_service_account_info(
-    #     info=SERVICE_CREDENTIALS_JSON, scopes=SCOPES
-    # )
 
     # The below is for user account authentication...
     # The file token.json stores the user's access and refresh tokens, and is
@@ -69,10 +68,10 @@ def main():
         service = build("drive", "v3", credentials=creds)
 
         # Create a file metadata object. Specifies name of file.
-        file_metadata = {"name": "breitkopf_beethoven_quartett_op_18_no_4_violine_1"}
+        file_metadata = {"name": part_name}
 
         # Create a media object. Specifies path to file.
-        file_path = "/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/breitkopf_beethoven_quartett_op_18_no_4_violine_1.pdf"  # noqa: E501
+        file_path = f"/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/{part_name}.pdf"  # noqa: E501
         media = MediaFileUpload(file_path)
 
         # Use the Files().create() method to upload the file
@@ -108,4 +107,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    assert (
+        len(argv) == 2
+    ), "One argument required for program: python quickstart.py <part_name>"
+    # remove '.pdf' extension if user included it
+    arg = argv[1]
+    part_name = arg[:-4] if arg[-4:] == ".pdf" else arg
+    main(part_name)
