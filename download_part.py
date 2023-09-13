@@ -39,12 +39,11 @@ def download_pdf(part_url):
         print(f"\nResponse content-type: {content_type}")
 
         # prepare to write the downloaded pdf (binary) to a file
-        pdf = open(f"{DEFAULT_DIR}{pdf_filename}", "wb+")
-        pdf.write(response.content)
-        # get first line of file (should be '%PDF'...)
-        pdf.seek(0)
-        line = pdf.readline()
-        pdf.close()
+        with open(f"{DEFAULT_DIR}{pdf_filename}", "wb+") as pdf_file:
+            pdf_file.write(response.content)
+            # get first line of file (should be '%PDF'...)
+            pdf_file.seek(0)
+            line = pdf_file.readline()
 
         # check first line of file to see if a pdf has been downloaded as opposed to some other file format
         first_text = line.decode("ascii")

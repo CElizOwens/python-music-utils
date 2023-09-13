@@ -20,7 +20,9 @@ def create_file(args):
         os.rename(file_path, renamed_file_path)
         print(f"\nSuccess! File renamed:\n{renamed_file_path}\n")
     else:
-        open(file_path, "x").close()
+        with open(file_path, "x") as my_file:
+            my_file.write("File created by create-rename_file.py")
+        # open(file_path, "x").close()
         print(f"\nSuccess! File created:\n{file_path}\n")
 
 
