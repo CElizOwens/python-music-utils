@@ -17,7 +17,7 @@ def rename_files(directory):
         # pass file name into formatter and store result
         formatted = formatter.convert(filename)
         # pass file name and result into file_namer (Success or failure will be logged)
-        file_namer.rename_file(filename, formatted)
+        file_namer.rename_file(filename, formatted, directory)
 
     print(f"New file names:\n{os.listdir()}")
 
