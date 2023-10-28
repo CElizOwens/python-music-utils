@@ -8,12 +8,13 @@ from zipfile import ZipFile
 
 # path to Opus' imslp folder
 OPUS_IMSLP = "/Users/owens/Documents/Opus_Oakland/imslp/"
+DOWNLOADS = "/Users/owens/Downloads/"
 
 # To run program:
 # python process_zipfile.py <path-to-zipfile> <new-folder-name>
 
 
-def process(zipped, new_folder):
+def process(zip_name, new_folder):
     # create <new_folder> in OPUS_IMSLP
     new_path = os.path.join(OPUS_IMSLP, new_folder)
     try:
@@ -21,9 +22,10 @@ def process(zipped, new_folder):
     except OSError as error:
         print(error)
 
+    zPath = os.path.join(DOWNLOADS, zip_name)
     # mv files from <folder> to <new_folder>
     # opening the zip file in READ mode
-    with ZipFile(zipped, "r") as zip:
+    with ZipFile(zPath, "r") as zip:
         # printing all the contents of the zip file
         # zip.printdir()
 
@@ -39,6 +41,6 @@ def process(zipped, new_folder):
 if __name__ == "__main__":
     assert (
         len(argv) == 3
-    ), f"argv = {argv}.\nCorrect format: python process_unzipped_folder.py '<path-to-unzipped-folder>' <new-folder-name>\n"  # noqa: E501
+    ), f"argv = {argv}.\nCorrect format: python process_unzipped_folder.py '<name-of-zipfile in /Downloads>' <new-folder-name>\n"  # noqa: E501
     # call function, passing the two arguments
     process(argv[1], argv[2])
