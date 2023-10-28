@@ -1,7 +1,7 @@
 #!usr/bin/env python
 import os
 
-# from sys import argv
+from sys import argv
 import utils.local.create_rename_file as file_namer
 import part_name_formatter as formatter
 
@@ -23,6 +23,10 @@ def rename_files(directory):
 
 
 if __name__ == "__main__":
-    rename_files(
-        "/Users/owens/Documents/OCO_parts/23-24/Set_2/Turina_Danza-fantàsticas"
-    )
+    assert (
+        len(argv) == 2
+    ), "Correct format: 'python convert_multiple.py <path-to-folder>'"
+    rename_files(argv[1])
+    # rename_files(
+    #     "/Users/owens/Documents/OCO_parts/23-24/Set_2/Turina_Danza-fantàsticas"
+    # )

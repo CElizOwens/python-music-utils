@@ -44,8 +44,11 @@ def convert(url):
         # print(f"-> {title}")
         return title
 
-    except Exception as e:
-        return f"Error occured in 'part_name_formatter.convert' function: {e}"
+    except ValueError as e:
+        print(
+            f"\nError occured in 'part_name_formatter.convert' function: {e}\nURL = {url}\n"
+        )
+        return None
 
 
 # print(convert(url6))

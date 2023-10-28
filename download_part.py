@@ -5,7 +5,8 @@ import get_cookies
 import part_name_formatter as formatter
 
 # Directory to test the downloading of pdfs
-DEFAULT_DIR = "/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/"
+# DEFAULT_DIR = "/Users/owens/music-projects/python-music-utils/test-directory/test-dir1/"
+DEFAULT_DIR = "/Users/owens/Documents/Opus_Oakland/imslp/"
 # Use any instrumental pdf url from the parts section of a given work
 # - example pdf below is clarinets from Beethoven Eroica, Breitkopf and Härtel
 # TEST_PDF_URL = "https://imslp.org/wiki/Special:ImagefromIndex/23762/hffp"
@@ -34,6 +35,10 @@ def download_pdf(part_url):
 
         pdf_url = response.url
         pdf_filename = formatter.convert(pdf_url)
+        if not pdf_filename:
+            raise ValueError(
+                "Filename reformatting unsuccessful. Download terminated.\nNot downloaded as pdf; or invalid cookie."
+            )
         content_type = response.headers["content-type"]
 
         print(f"\nResponse content-type: {content_type}")
